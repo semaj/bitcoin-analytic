@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Bitcoin Data</title>
+	<script src="jquery.js"></script>
+	<script src="highcharts.js"></script>
+	<div id="container" style="height:600px;"></div>
+	<script type="text/javascript">
+	$(document).ready(function(){
+		var data;
+
+
+		$.getJSON('../week.json', function(result){
+			data = result;
+			//alert(data[1]["mtgox"]);
+			var x_axis = [];
+			var coinbase = [];
+			var campbx = [];
+			var bitstamp = [];
+			var btce = [];
+			var mtgox = [];
+			for(var i in data){
+				var ref = data[i]["date"];
+				coinbase.push(data[i]["coinbase"]);
+				campbx.push(data[i]["campbx"]);
+				bitstamp.push(data[i]["bitstamp"]);
+				btce.push(data[i]["btce"]);
+				mtgox.push(data[i]["mtgox"]);
+				x_axis.push(ref["month"] + "/" + ref["day"] + " | " + ref["hour"] + ":" + ref["minute"]);
+			}
+			console.log(x_axis);
+			// for(var i = 1; i <= data.length; i++){
+			// 	var ref = data[i]["date"];
+			// 	x_axis.push(ref["month"] + "/" + ref["day"] + " | " + ref["hour"] + ":" + ref["minute"]);
+			// }
+		    $('#container').highcharts({
+		        chart: {
+		            type: 'line'
+		        },
+		        title: {
+		            text: 'Bitcoin Market Comparison'
+		        },
+		        xAxis: {
+		            categories: x_axis
+		        },
+		        yAxis: {
+		            title: {
+		                text: 'Latest Price'
+		            }
+		        },
+		        series: [{
+		            name: 'MtGox',
+		            data: mtgox
+		        }, {
+		            name: 'CoinBase',
+		            data: coinbase
+		        },{
+		            name: 'Bitstamp',
+		            data: campbx
+		        },{
+		            name: 'BTCE',
+		            data: btce
+		        },{
+		            name: 'CampBX',
+		            data: campbx
+		        }]
+		    });
+		});
+
+	});
+
+	</script>
+</head>
+<body>
+
+</body>
+</html>
