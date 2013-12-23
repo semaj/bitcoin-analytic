@@ -1,4 +1,3 @@
-
 #$:.push("/home3/jameslar/ruby/gems")
 ENV['GEM_PATH'] = '/home3/jameslar/ruby/gems:/usr/lib/ruby/gems/1.8'
 require 'rubygems'
@@ -60,7 +59,7 @@ open(server_url, 'w'){ |f|
 }
 
 open(server_url2, 'w'){ |f|
-	f.puts "fuckxss(" + JSON.generate(existing) + ")"
+	f.puts "(" + JSON.generate(existing) + ")"
 }
 
 
